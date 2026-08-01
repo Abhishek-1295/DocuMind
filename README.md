@@ -1,4 +1,4 @@
-# 📄 PDF Chat AI — Chat with your Documents
+# 📄 DocuMind — Chat with your Documents
 
 An AI-powered chatbot that lets you upload PDF documents and ask questions about their content. Built with Google Gemini AI, LangChain, and React.
 

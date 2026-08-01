@@ -4,7 +4,7 @@ export default function Sidebar({ documentInfo, isUploaded, onUploadClick, onCle
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <h1>📄 PDF Chat AI</h1>
+        <h1>📄 DocuMind</h1>
         <p>Powered by RAG</p>
       </div>
 

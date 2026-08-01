@@ -77,7 +77,7 @@ export default function App() {
         <button className="mobile-menu-btn" onClick={() => setSidebarOpen(true)}>
           ☰
         </button>
-        <h1 style={{ fontSize: '1rem', fontWeight: 600 }}>PDF Chat AI</h1>
+        <h1 style={{ fontSize: '1rem', fontWeight: 600 }}>DocuMind</h1>
       </div>
 
       {/* Mobile overlay */}
