@@ -34,8 +34,18 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 ALLOWED_EXTENSIONS = {"pdf"}
 
-# Shared RAG engine instance
-rag_engine = RAGEngine()
+# Shared RAG engine instance (lazy loaded)
+rag_engine = None
+
+def get_rag_engine():
+    global rag_engine
+    if rag_engine is None:
+        try:
+            rag_engine = RAGEngine()
+        except Exception as e:
+            print(f"Failed to initialize RAG Engine: {e}")
+            raise ValueError(f"AI Initialization failed. Did you set GOOGLE_API_KEY? Error: {e}")
+    return rag_engine
 
 
 # ---------------------------------------------------------------------------
@@ -70,7 +80,8 @@ def upload_pdf():
         file.save(file_path)
 
         # Process through RAG engine
-        result = rag_engine.process_pdf(file_path)
+        engine = get_rag_engine()
+        result = engine.process_document(file_path)
         return jsonify(result), 200
 
     except Exception as exc:
@@ -90,7 +101,8 @@ def chat():
             return jsonify({"error": "Question cannot be empty."}), 400
 
         session_id = data.get("session_id", "default")
-        result = rag_engine.ask_question(question, session_id)
+        engine = get_rag_engine()
+        result = engine.ask_question(question, session_id)
         return jsonify(result), 200
 
     except Exception as exc:
@@ -111,7 +123,8 @@ def status():
 def clear():
     """Clear the current session and remove all uploaded files."""
     try:
-        result = rag_engine.clear_session()
+        engine = get_rag_engine()
+        result = engine.clear_session()
 
         # Remove uploaded files
         if os.path.exists(UPLOAD_DIR):
