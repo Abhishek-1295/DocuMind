@@ -1,0 +1,18 @@
+# Node / React
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# Python / Flask
+backend/venv/
+backend/__pycache__/
+backend/.env
+backend/uploads/
+backend/chroma_db/
+backend/*.sqlite3
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
