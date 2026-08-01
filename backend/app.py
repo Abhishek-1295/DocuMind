@@ -80,7 +80,7 @@ def upload_pdf():
 
         # Process through RAG engine
         engine = get_rag_engine()
-        result = engine.process_document(file_path)
+        result = engine.process_pdf(file_path)
         return jsonify(result), 200
 
     except Exception as exc:
