@@ -31,7 +31,8 @@ export default function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: text }),
@@ -61,7 +62,8 @@ export default function App() {
 
   const handleClearChat = async () => {
     try {
-      await fetch('/api/clear', { method: 'DELETE' });
+      const API_URL = import.meta.env.VITE_API_URL || '';
+      await fetch(`${API_URL}/api/clear`, { method: 'DELETE' });
     } catch {
       // Continue clearing even if API call fails
     }

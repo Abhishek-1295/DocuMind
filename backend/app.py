@@ -25,8 +25,9 @@ load_dotenv()
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 MB upload limit
 
-# Allow requests from the Vite dev server
-CORS(app, origins=["http://localhost:5173"])
+# Allow requests from the Vite dev server and production frontend
+frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:5173")
+CORS(app, origins=[frontend_url])
 
 UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
